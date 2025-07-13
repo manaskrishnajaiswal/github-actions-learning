@@ -52,7 +52,7 @@ jobs:
       - name: Output build files
         run: ls -la
       - name: Output script file
-        run: echo "${{ needs.build.outputs.script-file }}""
+        run: echo "${{ needs.build.outputs.script-file }}"
       - name: Deploy
         run: echo "Deploying..."
         # working-directory: 03-Starting-Project
