@@ -41,4 +41,4 @@ jobs:
     steps:
       - name: Deploy
         run: echo "Deploying..."
-        working-directory: 03-Starting-Project
+        # working-directory: 03-Starting-Project
