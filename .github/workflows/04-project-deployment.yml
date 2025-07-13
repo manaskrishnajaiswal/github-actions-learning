@@ -1,4 +1,4 @@
-name: 04 PRoject Deployment
+name: 04 Project Deployment
 on: push
 jobs:
   lint:
