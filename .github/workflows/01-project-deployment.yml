@@ -1,5 +1,9 @@
 name: 01 Project Deployment
-on: ...
+on:
+  pull_request:
+    types:
+      - opened
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
