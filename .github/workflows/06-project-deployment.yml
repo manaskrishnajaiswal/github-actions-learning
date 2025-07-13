@@ -82,3 +82,11 @@ jobs:
         run: ls
       - name: Deploy
         run: echo "Deploying..."
+  report:
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output failure report
+        run:
+          echo "The workflow has failed. Please check the logs for details. ${{ github.workflow }} failed on commit ${{
+          github.sha }} by user ${{ github.actor }}."
