@@ -1,4 +1,4 @@
-name: Test Project
+name: Deployment Project
 on: push
 jobs:
   test:
@@ -17,6 +17,7 @@ jobs:
         run: npm test
         working-directory: 02-Starting-Project
   deploy:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
