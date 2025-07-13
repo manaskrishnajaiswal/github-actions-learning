@@ -1,0 +1,55 @@
+name: 04 PRoject Deployment
+on: push
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22"
+      - name: Install dependencies
+        run: npm ci
+        working-directory: 04-Practice-Project
+      - name: Run lint
+        run: npm lint
+        working-directory: 04-Practice-Project
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22"
+      - name: Install dependencies
+        run: npm ci
+        working-directory: 04-Practice-Project
+      - name: Run test
+        run: npm test
+        working-directory: 04-Practice-Project
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22"
+      - name: Install dependencies
+        run: npm ci
+        working-directory: 04-Practice-Project
+      - name: Build project
+        run: npm run build
+        working-directory: 04-Practice-Project
+      - name: Deploy to production
+        run: |
+          echo "Deploying to production server..."
+          # Add your deployment commands here
+        working-directory: 04-Practice-Project
