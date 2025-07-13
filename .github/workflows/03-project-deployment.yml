@@ -1,0 +1,44 @@
+name: Deploy website - Testing artifacts and output
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+        working-directory: 03-Starting-Project
+      - name: Lint code
+        run: npm run lint
+        working-directory: 03-Starting-Project
+      - name: Test code
+        run: npm run test
+        working-directory: 03-Starting-Project
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+        working-directory: 03-Starting-Project
+      - name: Build website
+        run: npm run build
+        working-directory: 03-Starting-Project
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: website-build-files
+          path: 03-Starting-Project/dist/**
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: echo "Deploying..."
+        working-directory: 03-Starting-Project
