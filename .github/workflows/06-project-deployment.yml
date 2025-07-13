@@ -13,16 +13,16 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: 06-Starting-Project/node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         working-directory: 06-Starting-Project
       - name: Lint code
         run: npm run lint
         working-directory: 06-Starting-Project
   test:
-    needs: lint
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -31,9 +31,10 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: 06-Starting-Project/node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         working-directory: 06-Starting-Project
       - name: Test code
@@ -56,9 +57,10 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: 06-Starting-Project/node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         working-directory: 06-Starting-Project
       - name: Build website
