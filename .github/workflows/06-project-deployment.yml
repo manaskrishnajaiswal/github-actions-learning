@@ -22,6 +22,7 @@ jobs:
         run: npm run lint
         working-directory: 06-Starting-Project
   test:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -39,7 +40,7 @@ jobs:
         run: npm run test
         working-directory: 06-Starting-Project
       - name: Upload test report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-report
           path: 06-Starting-Project/test.json
@@ -63,7 +64,7 @@ jobs:
         run: npm run build
         working-directory: 06-Starting-Project
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist-files
           path: 06-Starting-Project/dist/**
@@ -72,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get build artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: dist-files
       - name: Output contents
